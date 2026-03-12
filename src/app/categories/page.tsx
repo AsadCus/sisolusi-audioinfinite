@@ -91,7 +91,7 @@ export default function CategoriesPage() {
       <BannerSection />
       
       <div className="max-w-[1400px] mx-auto px-4 py-8 pt-24">
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
           <CategorySidebar
             categories={apiCategories}
             selectedCategory={selectedCategory}
@@ -99,9 +99,11 @@ export default function CategoriesPage() {
           />
 
           <div className="flex-1">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col gap-4 sm:gap-6 mb-6 sm:mb-8">
               <SearchBar products={products} onSearch={setSearch} />
-              <SortDropdown value={sortBy} onChange={setSortBy} />
+              <div className="flex justify-end">
+                <SortDropdown value={sortBy} onChange={setSortBy} />
+              </div>
             </div>
 
             <ProductGrid products={filteredAndSortedProducts} loading={loading} />

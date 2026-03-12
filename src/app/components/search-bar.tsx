@@ -16,11 +16,17 @@ export function SearchBar({ products, onSearch }: SearchBarProps) {
 }, [products])
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
       <Autocomplete
         freeSolo
         options={productOptions}
-        sx={{ width: 320 }}
+        sx={{ 
+          width: {
+            xs: 200,
+            sm: 260,
+            md: 320
+          }
+        }}
         onInputChange={(_, newInputValue) => {
           setSearch(newInputValue)
           onSearch(newInputValue)
@@ -56,9 +62,10 @@ export function SearchBar({ products, onSearch }: SearchBarProps) {
 
       <Button
         onClick={() => onSearch(search)}
-        className="rounded-lg"
+        className="rounded-lg text-sm px-3 sm:px-4"
       >
-        Search
+        <span className="hidden sm:inline">Search</span>
+        <span className="sm:hidden">🔍</span>
       </Button>
     </div>
   )

@@ -12,12 +12,12 @@ export function ProductGrid({ products, loading }: ProductGridProps) {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-x-6 md:gap-y-8">
         {[...Array(8)].map((_, i) => (
           <div key={i} className="animate-pulse">
-            <div className="bg-gray-100 aspect-[3/5] mb-4 rounded-lg"></div>
-            <div className="bg-gray-200 h-4 w-3/4 mb-2 rounded"></div>
-            <div className="bg-gray-200 h-3 w-full rounded"></div>
+            <div className="bg-gray-100 aspect-[3/5] mb-3 sm:mb-4 rounded-lg"></div>
+            <div className="bg-gray-200 h-3 sm:h-4 w-3/4 mb-1 sm:mb-2 rounded"></div>
+            <div className="bg-gray-200 h-2 sm:h-3 w-full rounded"></div>
           </div>
         ))}
       </div>
@@ -33,7 +33,7 @@ export function ProductGrid({ products, loading }: ProductGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-x-6 md:gap-y-8">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
