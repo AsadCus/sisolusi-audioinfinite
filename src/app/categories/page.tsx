@@ -6,6 +6,15 @@ import { Navigation } from '@/app/components/navigation'
 import { Footer } from '@/app/sections/footer'
 import { CategorySidebar, ProductGrid, SortDropdown, CategoryItem, SortOption, SearchBar } from '../components'
 import { BannerSection } from '../sections/banner-section'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 
 export default function CategoriesPage() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL as string
@@ -16,6 +25,8 @@ export default function CategoriesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All Products')
   const [sortBy, setSortBy] = useState<SortOption>('name')
   const [search, setSearch] = useState<string>('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 12
 
  useEffect(() => {
   const fetchProducts = async () => {
@@ -85,6 +96,24 @@ export default function CategoriesPage() {
     })
   }, [products, selectedCategory, sortBy, search])
 
+  // Pagination logic
+  const paginatedProducts = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    return filteredAndSortedProducts.slice(startIndex, endIndex)
+  }, [filteredAndSortedProducts, currentPage, itemsPerPage])
+
+  const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage)
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedCategory, sortBy, search])
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+  }
+
   return (
     <main className="min-h-screen bg-white">
       <Navigation />
@@ -106,7 +135,75 @@ export default function CategoriesPage() {
               </div>
             </div>
 
-            <ProductGrid products={filteredAndSortedProducts} loading={loading} />
+            <ProductGrid products={paginatedProducts} loading={loading} />
+            
+            {/* Pagination */}
+            {!loading && filteredAndSortedProducts.length > 0 && totalPages > 1 && (
+              <div className="mt-8 flex justify-center">
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious 
+                        onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                        className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                      />
+                    </PaginationItem>
+                    
+                    {/* Page numbers */}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                      // Show first page, last page, current page, and pages around current
+                      if (
+                        page === 1 || 
+                        page === totalPages || 
+                        page === currentPage ||
+                        page === currentPage - 1 ||
+                        page === currentPage + 1
+                      ) {
+                        return (
+                          <PaginationItem key={page}>
+                            <PaginationLink
+                              onClick={() => handlePageChange(page)}
+                              isActive={page === currentPage}
+                              className="cursor-pointer"
+                            >
+                              {page}
+                            </PaginationLink>
+                          </PaginationItem>
+                        )
+                      }
+                      
+                      // Show ellipsis for gaps
+                      if (
+                        (page === currentPage - 2 && currentPage > 3) ||
+                        (page === currentPage + 2 && currentPage < totalPages - 2)
+                      ) {
+                        return (
+                          <PaginationItem key={page}>
+                            <PaginationEllipsis />
+                          </PaginationItem>
+                        )
+                      }
+                      
+                      return null
+                    })}
+                    
+                    <PaginationItem>
+                      <PaginationNext 
+                        onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                        className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </div>
+            )}
+            
+            {/* Results info */}
+            {!loading && filteredAndSortedProducts.length > 0 && (
+              <div className="mt-4 text-center text-sm text-gray-600">
+                Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filteredAndSortedProducts.length)} of {filteredAndSortedProducts.length} results
+              </div>
+            )}
           </div>
         </div>
       </div>
