@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { APIProduct } from '@/app/types'
 import {
   Card,
@@ -10,8 +11,14 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push(`/products/${product.id}`)
+  }
+
   return (
-    <Card className="group cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+    <Card className="group cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1" onClick={handleClick}>
       
       <CardContent className="p-4">
         {/* Image */}
