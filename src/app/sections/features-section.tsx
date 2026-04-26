@@ -94,7 +94,7 @@ export function FeaturesSection() {
           <div className="flex items-end">
             <p className="text-[15px] text-neutral-600 leading-relaxed max-w-md">
               We combine cutting-edge engineering with exceptional craftsmanship to deliver
-              audio solutions that exceed the expectations of the world&apos;s most demanding professionals.
+              audio solutions that exceed the expectations of the world's most demanding professionals.
             </p>
           </div>
         </div>
@@ -105,6 +105,7 @@ export function FeaturesSection() {
           ))}
         </div>
 
+        {/* divide it into stats */}
         <div className="mt-16 grid grid-cols-3 divide-x divide-neutral-200 border border-neutral-200 bg-white">
           {[
             { value: "10+", label: "Years in Business" },

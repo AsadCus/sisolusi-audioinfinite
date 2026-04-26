@@ -1,282 +1,213 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Mail,
-  MapPin,
-  Send,
-  Instagram,
-  Youtube,
-  Linkedin,
-  ExternalLink,
-  MessageSquare,
-  Phone,
-} from "lucide-react";
-import Image from "next/image";
 
-const contactInfo = [
+const CONTACT_INFO = [
   {
-    icon: Mail,
-    label: "Business Email",
-    value: "sales@audioinfinite.com",
-    href: "mailto:sales@audioinfinite.com",
+    label: "General Enquiries",
+    value: "hello@audioinfinite.com",
+    href: "mailto:hello@audioinfinite.com",
   },
   {
-    icon: Phone,
-    label: "WhatsApp",
-    value: "+62 821-0000-0000",
-    href: "https://wa.me/6282100000000",
-  },
-  {
-    icon: MapPin,
-    label: "Head Office",
-    value: "Pudong New Area, Shanghai, China 200120",
-    href: "https://maps.google.com/?q=Shanghai,China",
+    label: "Phone",
+    value: "+886 789 1234",
+    href: "tel:+886 789 1234",
   },
 ];
 
-const socialLinks = [
-  {
-    icon: Instagram,
-    label: "Instagram",
-    href: "https://instagram.com/audioinfinite",
-    handle: "@audioinfinite",
-  },
-  {
-    icon: Youtube,
-    label: "YouTube",
-    href: "https://youtube.com/audioinfinite",
-    handle: "AudioInfinite",
-  },
-  {
-    icon: Linkedin,
-    label: "LinkedIn",
-    href: "https://linkedin.com/company/audioinfinite",
-    handle: "AudioInfinite Co.",
-  },
-];
+export function ContactSection() {
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
 
-export default function ContactSection() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) {
+    setFormState((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setLoading(false);
-    setSent(true);
-  };
+    setSubmitted(true);
+  }
 
   return (
-    <section id="contact" className="bg-zinc-50 py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-2 mb-4">
-          <MessageSquare size={16} className="text-zinc-400" />
-          <span className="text-xs font-semibold tracking-widest text-zinc-400 uppercase">
-            Get In Touch
-          </span>
-        </div>
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-zinc-900 leading-tight tracking-tight">
-            Contact Our Team
-          </h2>
-          {/* ini kenapa mirip ya.. */}
-          <p className="text-zinc-500 max-w-xs text-sm">
-            Our team of specialists is ready to help you find the right solution
-            for your project.
-          </p>
-        </div>
+    <section id="contact" className="section-pad bg-white border-t border-neutral-200">
+      <div className="container-x">
+        <div className="grid lg:grid-cols-[2fr_3fr] gap-16 lg:gap-24">
+          
+          <div>
+            <p className="eyebrow mb-5">Contact Us</p>
+            <h2
+              className="text-4xl lg:text-5xl font-normal text-neutral-900 tracking-tight leading-tight mb-6"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Let&apos;s Talk
+              <br />
+              About Sound.
+            </h2>
+            <p className="text-[15px] text-neutral-400 leading-relaxed mb-12 max-w-sm">
+              Whether you have a question about a product, need a custom solution, or simply want
+              to discuss your next audio project — we&apos;re here.
+            </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          <div className="lg:col-span-3 bg-white rounded-2xl p-8 border border-zinc-100 shadow-sm">
-            {sent ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-80 text-center">
-                <div className="w-14 h-14 rounded-full bg-zinc-900 flex items-center justify-center mb-4">
-                  <Send size={22} className="text-white" />
+            <div className="space-y-6">
+              {CONTACT_INFO.map((info) => (
+                <div key={info.label} className="flex items-start gap-5 border-b border-neutral-100 pb-6 last:border-b-0 last:pb-0">
+                  <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 mt-2 shrink-0" />
+                  <div>
+                    <div className="text-[10px] tracking-[0.16em] uppercase text-neutral-400 mb-1">
+                      {info.label}
+                    </div>
+                    <a 
+                      href={info.href}
+                      className="text-[14px] text-neutral-900 hover:text-neutral-500 transition-colors duration-200"
+                    >
+                      {info.value}
+                    </a>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-zinc-900 mb-2">
-                  Message Sent
+              ))}
+            </div>
+
+            <div className="mt-12 pt-8 border-t border-neutral-200">
+              <div className="text-[10px] tracking-[0.16em] uppercase text-neutral-400 mb-3">
+                Office
+              </div>
+              <p className="text-[14px] text-neutral-500 leading-relaxed">
+                Insert address here
+                <br />
+                Taiwan
+              </p>
+            </div>
+          </div>
+
+          {/* Form Side */}
+          <div>
+            {submitted ? (
+              <div className="h-full border border-neutral-200 flex flex-col items-center justify-center text-center p-12 min-h-100">
+                <div className="w-10 h-10 border border-neutral-200 flex items-center justify-center mb-6">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M2.5 8.5l3.5 3.5 7-7" stroke="#0a0a0a" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <h3
+                  className="text-2xl font-normal text-neutral-900 tracking-tight mb-3"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Message Received
                 </h3>
-                <p className="text-zinc-500 text-sm max-w-xs">
-                  Thank you for reaching out. We&apos;ll get back to you within
-                  1–2 business days.
+                <p className="text-[14px] text-neutral-400 leading-relaxed max-w-xs">
+                  Thank you for reaching out. We&apos;ll be in touch within one business day.
                 </p>
                 <button
                   onClick={() => {
-                    setSent(false);
-                    setForm({ name: "", email: "", message: "" });
+                    setSubmitted(false);
+                    setFormState({ name: "", email: "", subject: "", message: "" });
                   }}
-                  className="mt-6 text-sm text-zinc-400 hover:text-zinc-700 underline underline-offset-4 transition-colors"
+                  className="mt-8 text-[11px] tracking-[0.14em] uppercase font-medium text-neutral-400 hover:text-neutral-900 transition-colors duration-200"
                 >
-                  Send another message
+                  Send Another Message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, name: e.target.value }))
-                    }
-                    placeholder="Your name"
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 text-zinc-900 text-sm placeholder:text-zinc-300 focus:outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-100 transition-all bg-zinc-50"
-                  />
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="name" className="block text-[10px] tracking-[0.16em] uppercase text-neutral-400 mb-2">
+                      Full Name
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      value={formState.name}
+                      onChange={handleChange}
+                      placeholder="James Hartwell"
+                      className="w-full border border-neutral-200 bg-white px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-400 transition-colors duration-200"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-[10px] tracking-[0.16em] uppercase text-neutral-400 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formState.email}
+                      onChange={handleChange}
+                      placeholder="james@studio.com"
+                      className="w-full border border-neutral-200 bg-white px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-400 transition-colors duration-200"
+                    />
+                  </div>
                 </div>
+
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
-                    Email Address
+                  <label htmlFor="subject" className="block text-[10px] tracking-[0.16em] uppercase text-neutral-400 mb-2">
+                    Subject
                   </label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, email: e.target.value }))
-                    }
-                    placeholder="you@example.com"
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 text-zinc-900 text-sm placeholder:text-zinc-300 focus:outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-100 transition-all bg-zinc-50"
-                  />
+                  <div className="relative">
+                    <select
+                      id="subject"
+                      name="subject"
+                      required
+                      value={formState.subject}
+                      onChange={handleChange}
+                      className="w-full border border-neutral-200 bg-white px-4 py-3.5 text-[14px] text-neutral-900 focus:outline-none focus:border-neutral-400 transition-colors duration-200 appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled>Select a subject</option>
+                      <option value="product">Product Enquiry</option>
+                      <option value="sales">Sales & Pricing</option>
+                      <option value="support">Technical Support</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path d="M1 3l4 4 4-4" stroke="#A3A3A3" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                       </svg>
+                    </div>
+                  </div>
                 </div>
+
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
+                  <label htmlFor="message" className="block text-[10px] tracking-[0.16em] uppercase text-neutral-400 mb-2">
                     Message
                   </label>
                   <textarea
+                    id="message"
+                    name="message"
                     required
-                    rows={5}
-                    value={form.message}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, message: e.target.value }))
-                    }
-                    placeholder="Tell us about your project or inquiry..."
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 text-zinc-900 text-sm placeholder:text-zinc-300 focus:outline-none focus:border-zinc-400 focus:ring-2 focus:ring-zinc-100 transition-all bg-zinc-50 resize-none"
+                    rows={6}
+                    value={formState.message}
+                    onChange={handleChange}
+                    placeholder="Tell us about your project or enquiry..."
+                    className="w-full border border-neutral-200 bg-white px-4 py-3.5 text-[14px] text-neutral-900 placeholder:text-neutral-300 focus:outline-none focus:border-neutral-400 transition-colors duration-200 resize-none leading-relaxed"
                   />
                 </div>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-900 text-white text-sm font-semibold hover:bg-zinc-700 active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {loading ? (
-                    <>
-                      <svg
-                        className="animate-spin h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          strokeDasharray="32"
-                          strokeDashoffset="12"
-                        />
-                      </svg>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={15} />
-                      Send Message
-                    </>
-                  )}
-                </button>
+
+                <div className="flex items-center justify-between pt-2">
+                  <p className="text-[12px] text-neutral-300 max-w-xs leading-relaxed">
+                    We typically respond within one business day.
+                  </p>
+                  <button
+                    type="submit"
+                    className="inline-flex items-center gap-3 px-7 py-3.5 bg-neutral-900 text-white text-[11px] font-medium tracking-[0.14em] uppercase hover:bg-neutral-800 transition-colors duration-200 shrink-0"
+                  >
+                    Send Message
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                      <path d="M1 6.5h11M7 1.5l5 5-5 5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                </div>
               </form>
             )}
-          </div>
-
-          <div className="lg:col-span-2 flex flex-col gap-6">
-            <div className="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-              <h3 className="text-sm font-bold text-zinc-900 mb-5 uppercase tracking-wider">
-                Contact Details
-              </h3>
-              <div className="space-y-5">
-                {contactInfo.map(({ icon: Icon, label, value, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-start gap-4 group"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-zinc-100 flex items-center justify-center shrink-0 group-hover:bg-zinc-900 transition-colors">
-                      <Icon
-                        size={15}
-                        className="text-zinc-500 group-hover:text-white transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-xs text-zinc-400 font-medium mb-0.5">
-                        {label}
-                      </p>
-                      <p className="text-sm text-zinc-700 group-hover:text-zinc-900 transition-colors leading-snug">
-                        {value}
-                      </p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-zinc-900 rounded-2xl p-6 text-white">
-              <h3 className="text-sm font-bold mb-1 uppercase tracking-wider">
-                Follow Us
-              </h3>
-              <p className="text-zinc-400 text-xs mb-5">
-                Stay updated with our latest products and stories.
-              </p>
-              <div className="space-y-3">
-                {socialLinks.map(({ icon: Icon, label, href, handle }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between group py-2 border-b border-zinc-800 last:border-0"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon size={16} className="text-zinc-400" />
-                      <div>
-                        <p className="text-xs font-semibold text-white">
-                          {label}
-                        </p>
-                        <p className="text-xs text-zinc-500">{handle}</p>
-                      </div>
-                    </div>
-                    <ExternalLink
-                      size={13}
-                      className="text-zinc-600 group-hover:text-zinc-300 transition-colors"
-                    />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl overflow-hidden border border-zinc-100 relative h-36 bg-zinc-100">
-              <Image
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=60"
-                alt="Shanghai skyline"
-                className="w-full h-full object-cover opacity-50"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 flex items-center gap-2 shadow-sm">
-                  <MapPin size={14} className="text-zinc-700" />
-                  <span className="text-xs font-semibold text-zinc-800">
-                    Shanghai, China
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
