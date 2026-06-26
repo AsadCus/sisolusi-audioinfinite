@@ -38,8 +38,8 @@ const DOUBLED = [...BRANDS, ...BRANDS];
 
 export function MarqueeSection() {
   return (
-    <div className="pt-30 bg-white overflow-hidden">
-      <div className="flex items-center gap-4 py-4 px-6 lg:px-8 border-b border-neutral-100">
+    <div className="pt-32 bg-white overflow-hidden">
+      <div className="flex items-center gap-4 py-4 px-6 lg:px-8 border-b border-neutral-200">
         <span className="eyebrow shrink-0">Certified By</span>
         <div className="w-px h-3 bg-neutral-200 shrink-0" />
       </div>
@@ -56,7 +56,7 @@ export function MarqueeSection() {
                 alt={brand.name}
                 width={100}
                 height={22}
-                className="h-5.5 w-auto grayscale opacity-50"
+                className="h-5.5 w-auto opacity-50"
               />
             </div>
           ))}

@@ -58,7 +58,7 @@ export function CTASection() {
                 href="#contact"
                 className="inline-flex items-center justify-center gap-3 px-7 py-3.5 border border-neutral-200 text-[11px] font-medium tracking-[0.14em] uppercase text-neutral-500 hover:border-neutral-900 hover:text-neutral-900 transition-all duration-300"
               >
-                Contact Sales
+                Contact Us
               </Link>
             </div>
           </div>

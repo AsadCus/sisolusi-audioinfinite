@@ -45,7 +45,6 @@ const STATS = [
   { value: "98%", label: "Client Satisfaction" },
 ];
 
-// Named Export sesuai permintaan
 export function BannerSection() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -76,7 +75,7 @@ export function BannerSection() {
             alt={s.title}
             fill
             priority={i === 0}
-            className="object-cover grayscale"
+            className="object-cover"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-linear-to-r from-white via-white/75 to-white/20" />
@@ -139,6 +138,7 @@ export function BannerSection() {
         </div>
 
         <div className="absolute bottom-12 left-6 lg:left-8 right-6 lg:right-8 flex items-end justify-between">
+          {/* pagination */}
           <div className="flex items-center gap-2.5">
             {SLIDES.map((_, i) => (
               <button
@@ -154,7 +154,8 @@ export function BannerSection() {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-10">
+          {/* statistics, removable */}
+          <div className="hidden lg:flex items-center gap-8 pb-6">
             {STATS.map((stat) => (
               <div key={stat.label} className="text-right">
                 <div className="text-2xl font-semibold text-neutral-900 tracking-tight" style={{ fontFamily: "var(--font-display)" }}>

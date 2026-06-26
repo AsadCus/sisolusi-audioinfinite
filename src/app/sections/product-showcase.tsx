@@ -7,9 +7,9 @@ import Link from "next/link"; // Ditambahkan untuk navigasi internal
 const PRODUCTS = [
   {
     id: 1,
-    name: "Studio Monitor Pro",
-    category: "Monitors",
-    description: "Professional studio monitors with exceptional clarity and flat frequency response for accurate mixing decisions.",
+    name: "Wireless Headphone Pro",
+    category: "Headphones",
+    description: "High-fidelity wireless headphones with active noise cancellation and 30 hours of battery life for uninterrupted listening.",
     image: "https://images.unsplash.com/photo-1545127398-14699f92334b?w=800&q=80",
     specs: ["20Hz–20kHz", "8\" Woofer", "Active XO", "XLR/TRS"],
     badge: "Bestseller",
@@ -58,7 +58,7 @@ const PRODUCTS = [
   },
 ];
 
-const CATEGORIES = ["All", "Monitors", "Headphones", "Microphones", "Amplifiers", "Interfaces"];
+const CATEGORIES = ["All", "Headphones", "Microphones", "Amplifiers", "Interfaces"];
 
 // Menggunakan Named Export
 export function ProductShowcase() {
@@ -115,7 +115,7 @@ export function ProductShowcase() {
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0"
+                  className="object-cover transition-all duration-700"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
 

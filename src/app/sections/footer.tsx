@@ -10,21 +10,17 @@ const FOOTER_LINKS = {
   ],
   Company: [
     { label: "About Us", href: "#about" },
-    { label: "Careers", href: "#" },
-    { label: "Press", href: "#" },
     { label: "Blog", href: "#" },
   ],
   Support: [
     { label: "Help Center", href: "#" },
     { label: "Contact Us", href: "#contact" },
-    { label: "Warranty", href: "#" },
-    { label: "Returns", href: "#" },
   ],
 };
 
 export function Footer() {
   return (
-    <footer className="bg-neutral-50 border-t border-neutral-200">
+    <footer className="bg-white border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 lg:gap-8 py-16 lg:py-20">
 
@@ -95,8 +91,8 @@ export function Footer() {
           <p className="text-[11px] text-neutral-400 tracking-wide">
             © {new Date().getFullYear()} Audio Infinite. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (
+          <div className="flex items-center gap-3">
+            {["mail@audioinfinite.com", "Privacy Policy"].map((item) => (
               <Link key={item} href="#" className="text-[11px] text-neutral-400 hover:text-neutral-900 transition-colors duration-200">
                 {item}
               </Link>

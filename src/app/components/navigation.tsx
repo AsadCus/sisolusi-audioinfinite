@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: "Products", href: "#products" },
   { label: "Services", href: "#services" },
   { label: "Applications", href: "#applications" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
 ];
 
 export function Navigation() {

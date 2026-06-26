@@ -86,7 +86,6 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Form Side */}
           <div>
             {submitted ? (
               <div className="h-full border border-neutral-200 flex flex-col items-center justify-center text-center p-12 min-h-100">
