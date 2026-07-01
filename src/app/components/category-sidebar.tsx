@@ -22,7 +22,7 @@ export function CategorySidebar({
 
   return (
     <>
-      {/* Mobile Toggle Button */}
+      {/* Mobile Toggle */}
       <div className="lg:hidden mb-4">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -33,7 +33,7 @@ export function CategorySidebar({
         </button>
       </div>
 
-      {/* Sidebar - Hidden on mobile, visible on desktop */}
+      {/* Sidebar visible on desktop */}
       <aside className="hidden lg:block w-full lg:w-96 flex-shrink-0">
         <div className="border border-gray-200">
           {/* Header */}
