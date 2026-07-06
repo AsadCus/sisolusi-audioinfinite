@@ -1,22 +1,18 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Audio Infinite | Your Best Premium Audio Solutions',
-  description: 'Discover premium audio equipment and solutions for professionals',
-}
+  title: "Audio Infinite",
+  description:
+    "Studio-grade audio equipment designed for professionals and enthusiasts. From monitors to microphones, we deliver excellence in every product.",
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
-  )
+  );
 }
+
+export default RootLayout;

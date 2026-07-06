@@ -29,7 +29,6 @@ export function Marquee({
         className
       )}
     >
-      {/* Track - duplicated for seamless loop */}
       {Array.from({ length: 2 }).map((_, i) => (
         <div
           key={i}
