@@ -1,4 +1,4 @@
-import { Navigation } from "./components/Navigation";
+import { Navigation } from "./components/navigation";
 import { BannerSection } from "./sections/banner-section";
 import { MarqueeSection } from "./sections/marquee-section";
 import { ProductShowcase } from "./sections/product-showcase";
