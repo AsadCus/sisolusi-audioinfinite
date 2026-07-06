@@ -5,30 +5,22 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "Categories", href: "/categories" },
   { label: "Products", href: "#products" },
   { label: "Services", href: "#services" },
   { label: "Applications", href: "#applications" },
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
 ];
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-<<<<<<< HEAD
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/categories', label: 'Categories' },
-    { href: '#products', label: 'Products' },
-    { href: '#about', label: 'About Us' },
-  ]
-=======
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
->>>>>>> 8cfb6d3eb4dbdedacb6443f233e24c494820eb60
 
   return (
     <header
