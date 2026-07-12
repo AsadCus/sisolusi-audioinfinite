@@ -1,16 +1,15 @@
-
-import { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export interface CategoryItem {
-  name: string
-  subcategories?: string[]
+  name: string;
+  subcategories?: string[];
 }
 
 interface CategorySidebarProps {
-  categories: CategoryItem[]
-  selectedCategory: string
-  onSelectCategory: (category: string) => void
+  categories: CategoryItem[];
+  selectedCategory: string;
+  onSelectCategory: (category: string) => void;
 }
 
 export function CategorySidebar({
@@ -18,7 +17,7 @@ export function CategorySidebar({
   selectedCategory,
   onSelectCategory,
 }: CategorySidebarProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <>
@@ -26,15 +25,18 @@ export function CategorySidebar({
       <div className="lg:hidden mb-4">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="w-full flex items-center justify-between bg-black text-white px-4 py-3 font-medium text-sm rounded-lg"
-        >
+          className="w-full flex items-center justify-between bg-black text-white px-4 py-3 font-medium text-sm rounded-lg">
           <span>Categories</span>
-          {isMobileMenuOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          {isMobileMenuOpen ? (
+            <ChevronUp className="w-4 h-4" />
+          ) : (
+            <ChevronDown className="w-4 h-4" />
+          )}
         </button>
       </div>
 
       {/* Sidebar visible on desktop */}
-      <aside className="hidden lg:block w-full lg:w-96 flex-shrink-0">
+      <aside className="hidden lg:block w-full lg:w-96 shrink-0">
         <div className="border border-gray-200">
           {/* Header */}
           <div className="bg-black text-white px-4 py-3 font-medium text-sm">
@@ -48,9 +50,8 @@ export function CategorySidebar({
                 key={cat.name}
                 onClick={() => onSelectCategory(cat.name)}
                 className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                  selectedCategory === cat.name ? 'bg-gray-100 font-medium' : ''
-                }`}
-              >
+                  selectedCategory === cat.name ? "bg-gray-100 font-medium" : ""
+                }`}>
                 {cat.name}
               </button>
             ))}
@@ -68,13 +69,14 @@ export function CategorySidebar({
                 <button
                   key={cat.name}
                   onClick={() => {
-                    onSelectCategory(cat.name)
-                    setIsMobileMenuOpen(false)
+                    onSelectCategory(cat.name);
+                    setIsMobileMenuOpen(false);
                   }}
                   className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                    selectedCategory === cat.name ? 'bg-gray-100 font-medium' : ''
-                  }`}
-                >
+                    selectedCategory === cat.name
+                      ? "bg-gray-100 font-medium"
+                      : ""
+                  }`}>
                   {cat.name}
                 </button>
               ))}
@@ -83,5 +85,5 @@ export function CategorySidebar({
         </div>
       )}
     </>
-  )
+  );
 }
